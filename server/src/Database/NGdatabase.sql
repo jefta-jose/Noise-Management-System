@@ -1,0 +1,13 @@
+CREATE DATABASE NGdatabase
+USE NGdatabase
+
+CREATE TABLE Users
+
+CREATE TABLE Reports
+
+CREATE TABLE Feedback
+
+CREATE TABLE Notifications
+
+CREATE TABLE Emails
+
