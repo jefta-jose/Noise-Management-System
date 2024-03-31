@@ -1,1 +1,0 @@
-# Noise-Management-System

@@ -1,0 +1,99 @@
+CREATE DATABASE NGdatabase
+USE NGdatabase
+
+CREATE TABLE Admin(
+    AdminID VARCHAR(255) PRIMARY KEY,
+    FirstName VARCHAR(255) NOT NULL,
+    LastNmae VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    NationalID VARCHAR(255),
+    County VARCHAR(255),
+    Residence VARCHAR(255),
+    PhoneNumber VARCHAR(255),
+    Gender VARCHAR(255),
+    DateOfBirth VARCHAR(255),
+    PhotoURL VARCHAR(255)
+);
+
+SELECT * FROM Admin
+DROP TABLE Admin
+
+CREATE TABLE Users(
+    UserID VARCHAR(255) PRIMARY KEY,
+    FirstName VARCHAR(255) NOT NULL,
+    LastNmae VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    NationalID VARCHAR(255),
+    County VARCHAR(255),
+    Residence VARCHAR(255),
+    PhoneNumber VARCHAR(255),
+    Occupation VARCHAR(255),
+    Gender VARCHAR(255),
+    DateOfBirth VARCHAR(255),
+    PhotoURL VARCHAR(255)
+);
+
+SELECT * FROM Users
+DROP TABLE Users
+
+CREATE TABLE Reports(
+    ReportID VARCHAR(255) PRIMARY KEY,
+    UserID VARCHAR(255) NOT NULL,
+    Location VARCHAR(255),
+    TimeOfObservation VARCHAR(255),
+    Type VARCHAR(255),
+    Description VARCHAR(255),
+    NoiseLevel VARCHAR(255),
+    SourceOfNoise VARCHAR(255),
+    DurationOfNoise VARCHAR(255),
+    SupportingDocuments VARCHAR(255),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
+);
+
+SELECT * FROM Reports
+DROP TABLE Reports
+
+CREATE TABLE Feedback(
+    FeedBackID VARCHAR(255) PRIMARY KEY,
+    AdminID VARCHAR(255) NOT NULL,
+    UserID VARCHAR(255) NOT NULL,
+    Date VARCHAR(255),
+    Message VARCHAR(255)
+    FOREIGN KEY (AdminID) REFERENCES Admin(AdminID) ON DELETE CASCADE,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
+);
+
+SELECT * FROM Feedback
+DROP TABLE Feedback
+
+CREATE TABLE Notifications(
+    NotificationID VARCHAR(255) PRIMARY KEY,
+    AdminID VARCHAR(255) NOT NULL,
+    UserID VARCHAR(255) NOT NULL,
+    Type VARCHAR(255),
+    Date VARCHAR(255),
+    Staus VARCHAR(255),
+    Description VARCHAR(255),
+    FOREIGN KEY (AdminID) REFERENCES Admin(AdminID) ON DELETE CASCADE,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
+);
+
+SELECT * FROM Notifications
+DROP TABLE Notifications
+
+CREATE TABLE Emails(
+    EmailID VARCHAR(255) PRIMARY KEY,
+    AdminID VARCHAR(255) NOT NULL,
+    UserID VARCHAR(255) NOT NULL,
+    Date VARCHAR(255),
+    Subject VARCHAR(255),
+    Email VARCHAR(255),
+
+    FOREIGN KEY (AdminID) REFERENCES Admin(AdminID) ON DELETE CASCADE,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
+);
+
+SELECT * FROM Emails
+DROP TABLE Emails
