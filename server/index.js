@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import Logger from './src/Utils/Logger.js';
 import adminRouter from './src/Routes/adminRouter.js';
+import userRouter from './src/Routes/userRouter.js';
 
 const app = express();
 dotenv.config();
@@ -30,6 +31,7 @@ app.get('/health', (req, res) => {
 
 // routes
 app.use('/api', adminRouter);
+app.use('/api', userRouter);
 
 // start server
 app.listen(port, () => {
