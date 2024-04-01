@@ -29,7 +29,7 @@ app.get('/health', (req, res) => {
 });
 
 // routes
-app.use('/app', adminRouter);
+app.use('/api', adminRouter);
 
 // start server
 app.listen(port, () => {

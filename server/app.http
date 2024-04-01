@@ -1,0 +1,46 @@
+### health test
+GET http://localhost:9500/health
+
+### endpoint for registering an admin
+POST http://localhost:9500/api/register/admin
+Content-Type: application/json
+
+{
+    "FirstName": "Jeff",
+    "LastName": "Ndegwa",
+    "Email": "ndegwajeff4103t@gmail.com",
+    "Password": "pass404",
+    "NationalID": "12345678",
+    "County": "Nyeri",
+    "Residence": "Skuta",
+    "PhoneNumber": "0712345678",
+    "Gender": "Male",
+    "DateOfBirth": "3/31/2000",
+    "PhotoURL": "example.photo.url"
+}
+
+### login as admin
+POST http://localhost:9500/api/login/admin
+Content-Type: application/json
+
+{
+    "Email": "ndegwajeff4103t@gmail.com",
+    "Password": "pass404"
+}
+
+### get admin details by id
+GET http://localhost:9500/api/admin/3
+
+### update login details
+PUT http://localhost:9500/api/admin/update/6
+Content-Type: application/json
+
+{
+    "Email": "Kajiado34@gmail.com"
+}
+
+### get all admins
+GET http://localhost:9500/api/admins
+
+### delete an admin
+DELETE http://localhost:9500/api/admin/delete/3
