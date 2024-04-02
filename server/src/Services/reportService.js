@@ -55,7 +55,7 @@ export const specificReportsService = async (id) =>{
     }
 }
 
-//service for getting one post
+//service for getting one report
 export const onespecificReportsService = async (id) =>{
     try {
         const result = await poolRequest()

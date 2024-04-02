@@ -126,3 +126,32 @@ Content-Type: application/json
 
 ### delete a report
 DELETE http://localhost:9500/api/deletereport/3
+
+#############################################################################
+### create a feedback
+POST http://localhost:9500/api/createfeedback/1
+Content-Type: application/json
+
+{
+    "UserID": 5,
+    "Message": "testing another feedback"
+}
+
+### get all feedbacks
+GET http://localhost:9500/api/feedbacks
+
+### get feedback for a certain user
+GET http://localhost:9500/api/onefeedback/3
+
+### update a feedback
+PUT http://localhost:9500/api/updatefeedback/1
+Content-Type: application/json
+
+{
+    "Message": "Updating feedback 1"
+}
+
+### delete a feedback
+DELETE http://localhost:9500/api/deletefeedback/1
+
+#############################################################################

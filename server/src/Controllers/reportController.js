@@ -40,7 +40,7 @@ export const allReports = async (req,res) =>{
     }
 }
 
-//controller for getting posts for a specific user 
+//controller for getting reports for a specific user 
 export const specificReports = async (req, res) =>{
     try {
         const id = Number(req.params.id);
@@ -56,7 +56,7 @@ export const specificReports = async (req, res) =>{
     }
 }
 
-//controller for getting one post
+//controller for getting one report
 export const onespecificReport = async (req, res) =>{
     try {
         const id = Number(req.params.id);
