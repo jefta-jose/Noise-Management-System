@@ -42,7 +42,7 @@ CREATE TABLE Reports(
     ReportID INT IDENTITY(1,1) PRIMARY KEY,
     UserID INT NOT NULL,
     Location VARCHAR(255),
-    TimeOfObservation VARCHAR(255),
+    TimeOfReporting TIME,
     Type VARCHAR(255),
     Description VARCHAR(255),
     NoiseLevel VARCHAR(255),
@@ -51,6 +51,7 @@ CREATE TABLE Reports(
     SupportingDocuments VARCHAR(255),
     FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
 );
+
 
 SELECT * FROM Reports
 DROP TABLE Reports

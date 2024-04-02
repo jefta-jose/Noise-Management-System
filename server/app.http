@@ -54,7 +54,7 @@ Content-Type: application/json
 {
     "FirstName": "Jeff",
     "LastName": "Ndegwa",
-    "Email": "ndegwajeff41erGTY03t@gmail.com",
+    "Email": "ndegwajeff41erGTY03ght@gmail.com",
     "Password": "pass404",
     "NationalID": "12345678",
     "County": "Nyeri",
@@ -91,3 +91,67 @@ Content-Type: application/json
 
 ### delete a user
 DELETE http://localhost:9500/api/user/delete/1
+
+#############################################################################
+### create a report
+POST http://localhost:9500/api/createreport/5
+Content-Type: application/json
+
+{
+    "Location": "Kiambu",
+    "Type": "Domestic Violence",
+    "Description": "I think my neighbour is going to kill his wife",
+    "NoiseLevel": "high",
+    "SourceOfNoise": "neighbour's house",
+    "DurationOfNoise": "from 8pm to now",
+    "SupportingDocuments": "example.photourl"
+}
+
+### get all reports
+GET http://localhost:9500/api/reports
+
+### get speficific reports from specific users
+GET http://localhost:9500/api/report/4
+
+### get one post
+GET http://localhost:9500/api/onereport/2
+
+### updating a record
+PUT http://localhost:9500/api/updatereport/2
+Content-Type: application/json
+
+{
+    "Type": "music"
+}
+
+### delete a report
+DELETE http://localhost:9500/api/deletereport/3
+
+#############################################################################
+### create a feedback
+POST http://localhost:9500/api/createfeedback/1
+Content-Type: application/json
+
+{
+    "UserID": 5,
+    "Message": "testing another feedback"
+}
+
+### get all feedbacks
+GET http://localhost:9500/api/feedbacks
+
+### get feedback for a certain user
+GET http://localhost:9500/api/onefeedback/3
+
+### update a feedback
+PUT http://localhost:9500/api/updatefeedback/1
+Content-Type: application/json
+
+{
+    "Message": "Updating feedback 1"
+}
+
+### delete a feedback
+DELETE http://localhost:9500/api/deletefeedback/1
+
+#############################################################################

@@ -5,6 +5,8 @@ import cors from 'cors';
 import Logger from './src/Utils/Logger.js';
 import adminRouter from './src/Routes/adminRouter.js';
 import userRouter from './src/Routes/userRouter.js';
+import reportRouter from './src/Routes/reportRouter.js';
+import feedbackRouter from './src/Routes/feedbackRouter.js';
 
 const app = express();
 dotenv.config();
@@ -32,6 +34,8 @@ app.get('/health', (req, res) => {
 // routes
 app.use('/api', adminRouter);
 app.use('/api', userRouter);
+app.use('/api', reportRouter);
+app.use('/api', feedbackRouter);
 
 // start server
 app.listen(port, () => {
