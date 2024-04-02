@@ -72,13 +72,11 @@ DROP TABLE Feedback
 CREATE TABLE Notifications(
     NotificationID INT IDENTITY(1,1) PRIMARY KEY,
     AdminID INT NOT NULL,
-    UserID INT NOT NULL,
     Type VARCHAR(255),
     Date VARCHAR(255),
-    Staus VARCHAR(255),
+    Status VARCHAR(255),
     Description VARCHAR(255),
     FOREIGN KEY (AdminID) REFERENCES Admin(AdminID) ON DELETE CASCADE,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
 );
 
 SELECT * FROM Notifications

@@ -7,6 +7,7 @@ import adminRouter from './src/Routes/adminRouter.js';
 import userRouter from './src/Routes/userRouter.js';
 import reportRouter from './src/Routes/reportRouter.js';
 import feedbackRouter from './src/Routes/feedbackRouter.js';
+import notificationRouter from './src/Routes/notificationRouter,js';
 
 const app = express();
 dotenv.config();
@@ -36,6 +37,7 @@ app.use('/api', adminRouter);
 app.use('/api', userRouter);
 app.use('/api', reportRouter);
 app.use('/api', feedbackRouter);
+app.use('/api', notificationRouter);
 
 // start server
 app.listen(port, () => {

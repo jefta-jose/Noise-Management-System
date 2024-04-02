@@ -155,3 +155,29 @@ Content-Type: application/json
 DELETE http://localhost:9500/api/deletefeedback/1
 
 #############################################################################
+### create a notification
+POST http://localhost:9500/api/createnotification/1
+Content-Type: application/json
+
+{
+    "Type": "Domestic Violence",
+    "Status": "Police Onsite",
+    "Description": "A domestic violence incident has been reported in your area. Please stay vigilant as authorities are en route to the location"
+}
+
+### get all notifications
+GET http://localhost:9500/api/notifications
+
+### get one notification
+GET http://localhost:9500/api/onenotification/1
+
+### update a notification
+PUT http://localhost:9500/api/updatenotification/1
+Content-Type: application/json
+
+{
+    "Status": "solved"
+}
+
+### delete a notification
+DELETE http://localhost:9500/api/deletenotification/2
