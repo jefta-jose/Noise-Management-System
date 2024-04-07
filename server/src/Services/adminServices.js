@@ -18,7 +18,8 @@ export const createAdminService = async (adminData) => {
             PhoneNumber,
             Gender,
             DateOfBirth,
-            PhotoURL
+            PhotoURL,
+            Role
         } = adminData;
 
         // Check if the email already exists
@@ -40,8 +41,8 @@ export const createAdminService = async (adminData) => {
 
         // If the email does not exist, proceed with insertion
         const insertQuery = `
-            INSERT INTO Admin (FirstName, LastName, Email, Password, NationalID, County, Residence, PhoneNumber, Gender, DateOfBirth, PhotoURL)
-            VALUES (@FirstName, @LastName, @Email, @Password, @NationalID, @County, @Residence, @PhoneNumber, @Gender, @DateOfBirth, @PhotoURL);
+            INSERT INTO Admin (FirstName, LastName, Email, Password, NationalID, County, Residence, PhoneNumber, Gender, DateOfBirth, PhotoURL, Role)
+            VALUES (@FirstName, @LastName, @Email, @Password, @NationalID, @County, @Residence, @PhoneNumber, @Gender, @DateOfBirth, @PhotoURL, @Role);
         `;
 
         //sore a hashed password in the database
@@ -59,6 +60,8 @@ export const createAdminService = async (adminData) => {
             .input('Gender', sql.VarChar(255), Gender)
             .input('DateOfBirth', sql.VarChar(255), DateOfBirth)
             .input('PhotoURL', sql.VarChar(255), PhotoURL)
+            .input('Role', sql.VarChar(255), Role)
+
             .query(insertQuery);
 
         return result.recordset;
@@ -110,8 +113,8 @@ export const loginAsAdminService = async (loginData) => {
 export const adminDetailsService = async (id) => {
     try {
         const result = await poolRequest()
-        .input('AdminID', sql.Int, id)
-        .query("SELECT * FROM Admin WHERE AdminID = @AdminID");
+            .input('AdminID', sql.Int, id)
+            .query("SELECT * FROM Admin WHERE AdminID = @AdminID");
         return result.recordset;
     } catch (error) {
         return error;
@@ -140,10 +143,10 @@ export const updateAdminDetailsService = async (id, adminData) => {
 }
 
 //service for getting all admins
-export const getAllAdminsService = async () =>{
+export const getAllAdminsService = async () => {
     try {
         const result = await poolRequest()
-        .query("SELECT * FROM Admin");
+            .query("SELECT * FROM Admin");
         return result.recordset;
     } catch (error) {
         return error;
@@ -153,8 +156,8 @@ export const getAllAdminsService = async () =>{
 export const deleteAdminService = async (id) => {
     try {
         const result = await poolRequest()
-        .input('AdminID', sql.Int, id)
-        .query("DELETE FROM Admin WHERE AdminID = @AdminID");
+            .input('AdminID', sql.Int, id)
+            .query("DELETE FROM Admin WHERE AdminID = @AdminID");
         return result;
     } catch (error) {
         return error;

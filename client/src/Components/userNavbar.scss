@@ -1,0 +1,30 @@
+.UserNavbar{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3rem;
+    padding-right: 2rem;
+    margin-top: .2rem;
+
+
+    .search-bar{
+        display: flex;
+        align-items: center;
+        background-color: #5BD3C7;
+        padding: .5rem;
+        width: 20vw;
+        justify-content: space-evenly;
+        border-radius: 5px;
+        p{
+            color: #353755;
+        }
+
+        img{
+            cursor: pointer;
+        }
+    }
+
+    .notifications{
+        cursor: pointer;
+    }
+}

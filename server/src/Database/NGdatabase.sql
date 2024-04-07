@@ -13,7 +13,8 @@ CREATE TABLE Admin(
     PhoneNumber VARCHAR(255),
     Gender VARCHAR(255),
     DateOfBirth VARCHAR(255),
-    PhotoURL VARCHAR(255)
+    PhotoURL VARCHAR(255),
+    Role VARCHAR(255),
 );
 
 SELECT * FROM Admin
@@ -32,7 +33,8 @@ CREATE TABLE Users(
     Occupation VARCHAR(255),
     Gender VARCHAR(255),
     DateOfBirth VARCHAR(255),
-    PhotoURL VARCHAR(255)
+    PhotoURL VARCHAR(255),
+    Role VARCHAR(255),
 );
 
 SELECT * FROM Users

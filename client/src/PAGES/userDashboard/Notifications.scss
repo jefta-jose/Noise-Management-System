@@ -1,0 +1,50 @@
+.Notifications {
+    width: 100%;
+    height: 35vh;
+    overflow-y: auto; /* Add scrollbar if content exceeds height */
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      color: #353755;
+  
+      th, td {
+        border: 1px solid black;
+        padding: 8px;
+      }
+  
+      thead {
+        background-color: #E0E4EE;
+        tr{
+            height: 3rem;
+        }
+      }
+
+      .type-display {
+        width: 10rem;
+      }
+  
+      .time-display {
+        width: 10rem;
+      }
+  
+      .status-display {
+        width: 10rem;
+      }
+    }
+  
+    /* Conditional background colors */
+    .police-onsite {
+      background-color: #FFD600; /* Yellow */
+    }
+  
+    .solved {
+      background-color: #89FF8D; /* Light Green */
+    }
+  
+    .investigating {
+      background-color: #FF0000; /* Red */
+    }
+  }
+  

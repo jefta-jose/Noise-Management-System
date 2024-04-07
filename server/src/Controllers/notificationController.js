@@ -11,6 +11,7 @@ export const createNotification = async (req, res) => {
             Description: req.body.Description,
         }
 
+        console.log('notificationDetails', notificationDetails)
         const result = await createNotificationService(id, notificationDetails);
         if (result && result.message) {
             return res.status(500).json({ message: result.message });
@@ -26,13 +27,14 @@ export const createNotification = async (req, res) => {
 export const allNotifications = async (req, res) => {
     try {
         const result = await allNotificationsService();
-        if (result === 0) {
-            return res.status(404).json({ message: "no notifications availabe" })
+        if (result.length === 0) {
+            return res.status(404).json({ message: "No notifications available" })
         } else {
-            return res.status(201).json({ message: "all notifications found", result });
+            return res.status(200).send(result);
         }
     } catch (error) {
-        return res.status(500).json({ message: "internal server error" });
+        console.error("Error fetching notifications:", error);
+        return res.status(500).json({ message: "Internal server error" });
     }
 }
 

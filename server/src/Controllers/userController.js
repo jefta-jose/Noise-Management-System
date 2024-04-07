@@ -16,7 +16,8 @@ export const registerUser = async (req, res) => {
             Occupation: req.body.Occupation,
             Gender: req.body.Gender,
             DateOfBirth: req.body.DateOfBirth,
-            PhotoURL: req.body.PhotoURL
+            PhotoURL: req.body.PhotoURL,
+            Role: req.body.Role
         };
 
         const result = await createUserService(userData);
@@ -74,7 +75,7 @@ export const userDetails = async (req,res) =>{
 //controller for getting all users
 export const allUsers = async (req,res) =>{
     try {
-        const result = await getAllUsersServices();
+        const result = await getAllUsersServices()
         if (result === 0){
             return res.status(404).json({message: "no users found"});
         } else{
@@ -101,7 +102,8 @@ export const updateUserDetails = async (req, res) => {
                 Residence: req.body.Residence,
                 PhoneNumber: req.body.PhoneNumber,
                 Occupation: req.body.Occupation,
-                PhotoURL: req.body.PhotoURL
+                PhotoURL: req.body.PhotoURL,
+                Role: req.body.Role
             };
 
 

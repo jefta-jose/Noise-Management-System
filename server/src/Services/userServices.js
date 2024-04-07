@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 // service for creating a user
 export const createUserService = async (userData) => {
     try {
-        const { FirstName, LastName, Email, Password, NationalID, County, Residence, PhoneNumber, Occupation, Gender, DateOfBirth, PhotoURL } = userData;
+        const { FirstName, LastName, Email, Password, NationalID, County, Residence, PhoneNumber, Occupation, Gender, DateOfBirth, PhotoURL, Role } = userData;
         // Check if the email already exists
         const emailCheckQuery = `
                 SELECT COUNT(*) AS count
@@ -25,8 +25,8 @@ export const createUserService = async (userData) => {
 
         // If the email does not exist, proceed with insertion
         const insertQuery = `
-        INSERT INTO Users (FirstName, LastName, Email, Password, NationalID, County, Residence, PhoneNumber, Occupation, Gender, DateOfBirth, PhotoURL)
-        VALUES (@FirstName, @LastName, @Email, @Password, @NationalID, @County, @Residence, @PhoneNumber, @Occupation, @Gender, @DateOfBirth, @PhotoURL);
+        INSERT INTO Users (FirstName, LastName, Email, Password, NationalID, County, Residence, PhoneNumber, Occupation, Gender, DateOfBirth, PhotoURL, Role)
+        VALUES (@FirstName, @LastName, @Email, @Password, @NationalID, @County, @Residence, @PhoneNumber, @Occupation, @Gender, @DateOfBirth, @PhotoURL, @Role);
     `;
 
         //sore a hashed password in the database
@@ -45,6 +45,7 @@ export const createUserService = async (userData) => {
             .input('Gender', sql.VarChar(255), Gender)
             .input('DateOfBirth', sql.VarChar(255), DateOfBirth)
             .input('PhotoURL', sql.VarChar(255), PhotoURL)
+            .input('Role', sql.VarChar(255), Role)
             .query(insertQuery);
 
         return result.recordset;
@@ -60,6 +61,7 @@ export const loginAsUserService = async (loginData) => {
         const result = await poolRequest()
             .input('Email', sql.VarChar(255), loginData.Email)
             .query("SELECT * FROM Users WHERE Email = @Email");
+
 
         // check whether such a user exists
         if (!result || result.recordset.length === 0) {
@@ -78,7 +80,7 @@ export const loginAsUserService = async (loginData) => {
         // generate a token if passwords match
         const token = jwt.sign({ UserID }, process.env.JWT_SECRET, { expiresIn: '48h' });
         console.log("Generated token:", token);
-        return { token };
+        return { token }, result.recordset;
     } catch (error) {
         console.error("Error in loginAsUserService:", error);
         return { message: "Internal server error" };
@@ -89,8 +91,8 @@ export const loginAsUserService = async (loginData) => {
 export const getUserByIdService = async (id) => {
     try {
         const result = await poolRequest()
-        .input("UserID", sql.Int, id)
-        .query("SELECT * FROM Users WHERE UserID = @UserID")
+            .input("UserID", sql.Int, id)
+            .query("SELECT * FROM Users WHERE UserID = @UserID")
         return result.recordset;
     } catch (error) {
         return error;
@@ -98,11 +100,11 @@ export const getUserByIdService = async (id) => {
 }
 
 //service for getting all users
-export const getAllUsersServices = async ()=>{
+export const getAllUsersServices = async () => {
     try {
         const result = await poolRequest()
-        .query("SELECT * FROM Users")
-        return result.recordset;
+            .query("SELECT * FROM Users")
+        return result;
     } catch (error) {
         return error;
     }
@@ -114,9 +116,9 @@ export const updateUserDetailsService = async (id, updateDetails) => {
         const updateFields = Object.keys(updateDetails).map(key => `${key} =@${key}`).join(', ');
 
         const request = poolRequest()
-        .input("UserID", sql.Int, id);
+            .input("UserID", sql.Int, id);
 
-        for (const [key, value] of Object.entries(updateDetails)){
+        for (const [key, value] of Object.entries(updateDetails)) {
             request.input(key, sql.VarChar(255), value)
         }
 
@@ -128,11 +130,11 @@ export const updateUserDetailsService = async (id, updateDetails) => {
 }
 
 //service for deleting a user
-export const deleteUserService = async (id) =>{
+export const deleteUserService = async (id) => {
     try {
         const result = await poolRequest()
-        .input('UserID', sql.Int, id)
-        .query("DELETE FROM Users WHERE UserID = @UserID");
+            .input('UserID', sql.Int, id)
+            .query("DELETE FROM Users WHERE UserID = @UserID");
     } catch (error) {
         return error;
     }
