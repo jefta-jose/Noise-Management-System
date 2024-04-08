@@ -13,7 +13,9 @@ export const registerAdmin = async (req, res) => {
         PhoneNumber: req.body.PhoneNumber,
         Gender: req.body.Gender,
         DateOfBirth: req.body.DateOfBirth,
-        PhotoURL: req.body.PhotoURL
+        PhotoURL: req.body.PhotoURL,
+        Role: req.body.Role,
+
     };
     console.log("Request Body", adminData);
     try {

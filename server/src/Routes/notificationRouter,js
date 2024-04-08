@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { createNotification, allNotifications, onespecificNotification, updateNotification, deleteNotification } from "../Controllers/notificationController.js";
+
+const notificationRouter = Router();
+notificationRouter.post('/createnotification/:id', createNotification);
+notificationRouter.get('/notifications', allNotifications);
+notificationRouter.get('/onenotification/:id', onespecificNotification); // by notification id
+notificationRouter.put('/updatenotification/:id', updateNotification);
+notificationRouter.delete('/deletenotification/:id', deleteNotification);
+
+export default notificationRouter;

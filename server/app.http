@@ -9,7 +9,7 @@ Content-Type: application/json
 {
     "FirstName": "Jeff",
     "LastName": "Ndegwa",
-    "Email": "ndegwajeff41HYGY03t@gmail.com",
+    "Email": "example@gmail.com",
     "Password": "pass404",
     "NationalID": "12345678",
     "County": "Nyeri",
@@ -17,7 +17,8 @@ Content-Type: application/json
     "PhoneNumber": "0712345678",
     "Gender": "Male",
     "DateOfBirth": "3/31/2000",
-    "PhotoURL": "example.photo.url"
+    "PhotoURL": "example.photo.url",
+    "Role": "Admin"
 }
 
 ### login as admin
@@ -52,9 +53,9 @@ POST http://localhost:9500/api/register/user
 Content-Type: application/json
 
 {
-    "FirstName": "Jeff",
-    "LastName": "Ndegwa",
-    "Email": "ndegwajeff41erGTY03ght@gmail.com",
+    "FirstName": "Steven",
+    "LastName": "Jobs",
+    "Email": "stevenjobs@gmail.com",
     "Password": "pass404",
     "NationalID": "12345678",
     "County": "Nyeri",
@@ -63,7 +64,9 @@ Content-Type: application/json
     "Occupation": "farmer",
     "Gender": "Male",
     "DateOfBirth": "3/31/2000",
-    "PhotoURL": "example.photo.url"
+    "PhotoURL": "example.photo.url",
+    "Role": "User"
+
 }
 
 ### login user 
@@ -71,7 +74,7 @@ POST http://localhost:9500/api/login/user
 Content-Type: application/json
 
 {
-    "Email": "ndegwajeff41erGTY03t@gmail.com",
+    "Email": "ndegwajeff41erGTY03ght@gmail.com",
     "Password": "pass404"
 }
 
@@ -90,11 +93,11 @@ Content-Type: application/json
 }
 
 ### delete a user
-DELETE http://localhost:9500/api/user/delete/1
+DELETE http://localhost:9500/api/user/delete/2
 
 #############################################################################
 ### create a report
-POST http://localhost:9500/api/createreport/5
+POST http://localhost:9500/api/createreport/1
 Content-Type: application/json
 
 {
@@ -111,7 +114,7 @@ Content-Type: application/json
 GET http://localhost:9500/api/reports
 
 ### get speficific reports from specific users
-GET http://localhost:9500/api/report/4
+GET http://localhost:9500/api/report/1
 
 ### get one post
 GET http://localhost:9500/api/onereport/2
@@ -125,7 +128,7 @@ Content-Type: application/json
 }
 
 ### delete a report
-DELETE http://localhost:9500/api/deletereport/3
+DELETE http://localhost:9500/api/deletereport/2
 
 #############################################################################
 ### create a feedback
@@ -133,15 +136,15 @@ POST http://localhost:9500/api/createfeedback/1
 Content-Type: application/json
 
 {
-    "UserID": 5,
-    "Message": "testing another feedback"
+    "UserID": 1,
+    "Message": "We are Workng on your request"
 }
 
 ### get all feedbacks
 GET http://localhost:9500/api/feedbacks
 
 ### get feedback for a certain user
-GET http://localhost:9500/api/onefeedback/3
+GET http://localhost:9500/api/feedback/1
 
 ### update a feedback
 PUT http://localhost:9500/api/updatefeedback/1
@@ -155,3 +158,58 @@ Content-Type: application/json
 DELETE http://localhost:9500/api/deletefeedback/1
 
 #############################################################################
+### create a notification
+POST http://localhost:9500/api/createnotification/1
+Content-Type: application/json
+
+{
+    "Type": "Criminal Activity",
+    "Status": "Investigating",
+    "Description": " Criminals suspected to have broken down a local business in your area’If you hear anything please let us know. Investigations ongoing. "
+}
+
+### get all notifications
+GET http://localhost:9500/api/notifications
+
+### get one notification
+GET http://localhost:9500/api/onenotification/1
+
+### update a notification
+PUT http://localhost:9500/api/updatenotification/1003
+Content-Type: application/json
+
+{
+    "Status": "Solved"
+}
+
+### delete a notification
+DELETE http://localhost:9500/api/deletenotification/2
+
+
+#############################################################################
+### create a Email
+POST http://localhost:9500/api/createEmail/1
+Content-Type: application/json
+
+{
+    "UserID": 1,
+    "Subject": "Noise Pollution",
+    "Email": "A domestic violence incident has been reported in your area. Please stay vigilant as authorities are en route to the location"
+}
+
+### get all Emails
+GET http://localhost:9500/api/Emails
+
+### get one Email
+GET http://localhost:9500/api/oneEmail/6
+
+### update a Email
+PUT http://localhost:9500/api/updateEmail/6
+Content-Type: application/json
+
+{
+    "Subject": "solved"
+}
+
+### delete a Email
+DELETE http://localhost:9500/api/deleteEmail/6

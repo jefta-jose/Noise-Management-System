@@ -44,7 +44,7 @@ export const specificFeedback = async (req, res) =>{
         if (result && result.message){
             return res.status(500).json({message: result.message});
         } else{
-            return res.status(201).json({message: `feedbacks for user with id ${id}`, result});
+            return res.status(201).send(result);
         }
     } catch (error) {
         return res.status(500).json({message: "internal server error"});
