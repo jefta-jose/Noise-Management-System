@@ -1,0 +1,55 @@
+.Report{
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    .user-details{
+        background-color: #E0E4EE;
+        width: 25%;
+        height: 50vh;
+        display: grid;
+        place-items: center;
+        border-radius: 5px;
+        color: #353755;
+
+        .names{
+            font-weight: 800;
+        }
+    }
+
+    .Report-form{
+        .notice{
+            margin-top: .2rem;
+            margin-bottom: 1rem;
+        }
+
+        form{
+            display: flex;
+            justify-content: space-between;
+            padding-right: 6rem;
+
+            .label-left{
+                color: #353755;
+                font-weight: 700;
+
+                input{
+                    background-color: #5BD3C7;
+                }
+            }
+
+            .label-right{
+                color: #353755;
+                font-weight: 700;
+
+                input{
+                    background-color: #5BD3C7;
+                }
+            }
+        }
+
+        .submit-report{
+            background-color: red;
+            margin-top: 1rem;
+        }
+    }
+}

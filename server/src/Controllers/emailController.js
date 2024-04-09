@@ -1,6 +1,6 @@
-import { createEmailService, allEmailsService, specificEmailService, onespecificEmailService, updateEmailService, deleteEmailService } from "../Services/emailServices.js";
+import { createEmailServiceToAdmin, createEmailService, allEmailsService, specificEmailService, onespecificEmailService, updateEmailService, deleteEmailService } from "../Services/emailServices.js";
 
-//controller for creating a Email
+//controller for creating an Email to user
 export const createEmail = async (req, res) => {
     try {
         const id = Number(req.params.id);
@@ -22,6 +22,38 @@ export const createEmail = async (req, res) => {
         return res.status(500).json({ message: "internal server error" })
     }
 }
+
+//controller for creating a Email to admin 
+// Controller for creating an Email to admin
+export const createEmailToAdmin = async (req, res) => {
+    try {
+        const id = Number(req.params.id);
+        const EmailDetails = {
+            AdminID: req.body.AdminID,
+            Date: req.body.Date,
+            Subject: req.body.Subject,
+            Email: req.body.Email,
+        };
+
+        const result = await createEmailServiceToAdmin(
+            id,
+            EmailDetails.AdminID,
+            EmailDetails.Subject,
+            EmailDetails.Email
+        );
+
+        console.log('EmailDetails', EmailDetails);
+
+        if (result && result.message) {
+            return res.status(500).send(result);
+        } else {
+            return res.status(201).send(result);
+        }
+    } catch (error) {
+        return res.status(500).json({ message: "internal server error" });
+    }
+};
+
 
 //controller for getting all Emails
 export const allEmails = async (req, res) => {
@@ -46,7 +78,7 @@ export const specificEmail = async (req, res) => {
         if (result && result.message) {
             return res.status(500).json({ message: result.message });
         } else {
-            return res.status(201).json({ message: `Emails for user with id ${id}`, result });
+            return res.status(201).send(result);
         }
     } catch (error) {
         return res.status(500).json({ message: "internal server error" });
