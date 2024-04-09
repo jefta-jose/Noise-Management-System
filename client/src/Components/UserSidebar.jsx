@@ -6,6 +6,7 @@ import reportlogo from "../assets/Rectangle 8.png";
 import logoutlogo from "../assets/Rectangle 12.png";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./userSidebar.scss";
+import { useUpdateUserDetailsMutation } from "../Features/userfeatures/User";
 
 const UserSidebar = () => {
   const navigate = useNavigate();
@@ -26,6 +27,9 @@ const UserSidebar = () => {
   const handleNavigateToLogout = () => {
     navigate("/");
   };
+
+  ////////////////////////////////////////////////////////////
+  
 
   return (
     <div className="UserSidebar">
@@ -66,12 +70,9 @@ const UserSidebar = () => {
 
       <div className="new-feature">
         <h4>New Feature</h4>
-        <p>You can now interact with your  </p>
-        <p> mails at any time </p>
-        <button 
-        className={`mail ${pathname === "/userdashboard/mails" ? "active" : ""}`}
-        onClick={handleNavigateToMails}
-        >Check Now</button>
+        <p>You can now update your </p>
+        <p> Profile at any time </p>
+        <button>Check Now</button>
       </div>
     </div>
   );

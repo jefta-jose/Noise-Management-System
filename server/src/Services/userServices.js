@@ -104,30 +104,29 @@ export const getAllUsersServices = async () => {
     try {
         const result = await poolRequest()
             .query("SELECT * FROM Users")
-        return result;
+        return result.recordset;
     } catch (error) {
         return error;
     }
 }
 
-//service for updating a user details
 export const updateUserDetailsService = async (id, updateDetails) => {
     try {
-        const updateFields = Object.keys(updateDetails).map(key => `${key} =@${key}`).join(', ');
+        const updateFields = Object.keys(updateDetails).map(key => `${key} = @${key}`).join(', ');
 
-        const request = poolRequest()
-            .input("UserID", sql.Int, id);
+        const request = poolRequest().input("UserID", sql.Int, id);
 
         for (const [key, value] of Object.entries(updateDetails)) {
-            request.input(key, sql.VarChar(255), value)
+            request.input(key, sql.VarChar(255), value);
         }
 
-        const result = await request.query(`UPDATE Users SET ${updateFields} WHERE UserID = @UserID `);
+        const result = await request.query(`UPDATE Users SET ${updateFields} WHERE UserID = @UserID`);
         return result;
     } catch (error) {
         return error;
     }
 }
+
 
 //service for deleting a user
 export const deleteUserService = async (id) => {

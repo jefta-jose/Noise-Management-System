@@ -12,7 +12,7 @@ export const userApi = createApi({
                 method: 'POST',
                 body: userData
             }),
-            invalidateTags: ['user'],
+            invalidatesTags: ['user'],
         }),
         login: builder.mutation({
             query: (loginData) => ({
@@ -23,7 +23,7 @@ export const userApi = createApi({
                     Password: loginData.Password
                 }
             }),
-            invalidateTags: ['user'],
+            invalidatesTags: ['user'],
         }),
         getAllUsers: builder.query({
             query: () => 'users',
@@ -33,7 +33,7 @@ export const userApi = createApi({
             query: (id) => ({
                 url: `user/${id}`,
             }),
-            provideTags: ['user'],
+            providesTags: ['user'],
         }),
         updateUserDetails: builder.mutation({
             query: (id, updateDetails) => ({
@@ -49,19 +49,19 @@ export const userApi = createApi({
                     PhotoURL: updateDetails.PhotoURL
                 }
             }),
-            invalidateTags: ['user'],
+            invalidatesTags: ['user'],
         }),
         deleteUser: builder.mutation({
             query: (id) => ({
                 url: `user/delete/${id}`,
                 method: 'DELETE'
             }),
-            invalidateTags: ['user'],
+            invalidatesTags: ['user'],
         }),
 
         //////////////////////////// - NOTIFICATIONS API
         getNotifications: builder.query({
-            query: ()=>'notifications',
+            query: () => 'notifications',
             providesTags: ['user'],
         }),
 
@@ -69,8 +69,68 @@ export const userApi = createApi({
         getFeedback: builder.query({
             query: (id) => `feedback/${id}`,
             providesTags: ['user'],
-        }),        
+        }),
+        //////////////////////////////////// mails api
+        createMail: builder.mutation({
+            query: ({ id, AdminID, Subject, Email }) => ({
+                url: `createEmailToAdmin/${id}`,
+                method: 'POST',
+                body: {
+                    UserID: id,
+                    AdminID,
+                    Subject,
+                    Email
+                }
+            }),
+            invalidatesTags: ['user'],
+        }),
+
+
+        getUserEmails: builder.query({
+            query: (id) => ({
+                url: `Email/${id}`,
+            }),
+            providesTags: ['user'],
+        }),
+        deleteEmail: builder.mutation({
+            query: (id) => ({
+                url: `deleteEmail/${id}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['user'],
+        }),
+
+        ////////////////////////////////// reports
+        reportIncident: builder.mutation({
+            query: ({ id, Location, Type, Description, NoiseLevel, SourceOfNoise, DurationOfNoise, SupportingDocuments }) => ({
+                url: `createreport/${id}`,
+                method: 'POST',
+                body: {
+                    UserID: id,
+                    Location,
+                    Type,
+                    Description,
+                    NoiseLevel,
+                    SourceOfNoise,
+                    DurationOfNoise,
+                    SupportingDocuments
+                },
+            }),
+        }),
     }),
 });
 
-export const { useGetFeedbackQuery , useGetNotificationsQuery ,useGetAllUsersQuery, useRegisterUser, useLoginMutation, useGetUserByIdQuery, useupdateUserDetailsMutation, useDeleteUserMutation } = userApi;
+export const {
+    useReportIncidentMutation,
+    useCreateMailMutation,
+    useGetUserEmailsQuery,
+    useDeleteEmailMutation,
+    useGetFeedbackQuery,
+    useGetNotificationsQuery,
+    useGetAllUsersQuery,
+    useRegisterUserMutation,
+    useLoginMutation,
+    useGetUserByIdQuery,
+    useUpdateUserDetailsMutation,
+    useDeleteUserMutation
+} = userApi;

@@ -101,12 +101,12 @@ POST http://localhost:9500/api/createreport/1
 Content-Type: application/json
 
 {
-    "Location": "Kiambu",
-    "Type": "Domestic Violence",
-    "Description": "I think my neighbour is going to kill his wife",
-    "NoiseLevel": "high",
-    "SourceOfNoise": "neighbour's house",
-    "DurationOfNoise": "from 8pm to now",
+    "Location": "Karatina",
+    "Type": "roars",
+    "Description": "I think there might be a lion",
+    "NoiseLevel": "Very - high",
+    "SourceOfNoise": "Kinunga",
+    "DurationOfNoise": "30 minutes ago",
     "SupportingDocuments": "example.photourl"
 }
 
@@ -193,15 +193,28 @@ Content-Type: application/json
 
 {
     "UserID": 1,
-    "Subject": "Noise Pollution",
-    "Email": "A domestic violence incident has been reported in your area. Please stay vigilant as authorities are en route to the location"
+    "Subject": "one two three",
+    "Email": "the backend is working"
+}
+
+### create a Email to admin 
+POST http://localhost:9500/api/createEmailToAdmin/1
+Content-Type: application/json
+
+{
+    "AdminID": 1,
+    "Subject": "testing testing ",
+    "Email": "ONE TO ONE TO"
 }
 
 ### get all Emails
 GET http://localhost:9500/api/Emails
 
+### get all Emails for a user
+GET http://localhost:9500/api/Email/1
+
 ### get one Email
-GET http://localhost:9500/api/oneEmail/6
+GET http://localhost:9500/api/oneEmail/1003
 
 ### update a Email
 PUT http://localhost:9500/api/updateEmail/6

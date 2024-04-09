@@ -1,20 +1,20 @@
 import { poolRequest, sql } from "../Utils/dbConnect.js";
 
 //service for creating a report
-export const createReportService = async (id, reportDetails) => {
+export const createReportService = async (id, Location, Type, Description, NoiseLevel, SourceOfNoise, DurationOfNoise, SupportingDocuments)  => {
     try {
         //get the current time
         const currentTime = new Date().toLocaleTimeString();
         const result = await poolRequest()
         .input("UserID", sql.Int, id)
-        .input("Location", sql.VarChar, reportDetails.Location)
+        .input('Location', sql.VarChar, Location)
         .input("TimeOfReporting", sql.VarChar, currentTime)
-        .input("Type", sql.VarChar, reportDetails.Type)
-        .input("Description", sql.VarChar, reportDetails.Description)
-        .input("NoiseLevel", sql.VarChar, reportDetails.NoiseLevel)
-        .input("SourceOfNoise", sql.VarChar, reportDetails.SourceOfNoise)
-        .input("DurationOfNoise", sql.VarChar, reportDetails.DurationOfNoise)
-        .input("SupportingDocuments", sql.VarChar, reportDetails.SupportingDocuments)
+        .input("Type", sql.VarChar, Type)
+        .input("Description", sql.VarChar, Description)
+        .input("NoiseLevel",sql.VarChar, NoiseLevel)
+        .input("SourceOfNoise", sql.VarChar, SourceOfNoise)
+        .input("DurationOfNoise", sql.VarChar, DurationOfNoise)
+        .input("SupportingDocuments", sql.VarChar, SupportingDocuments)
 
         const query = `
         INSERT INTO Reports(UserId, Location, TimeOfReporting, Type, Description, NoiseLevel, SourceOfNoise, DurationOfNoise, SupportingDocuments )

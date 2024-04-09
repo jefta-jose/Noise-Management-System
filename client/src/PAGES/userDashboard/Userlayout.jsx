@@ -28,7 +28,7 @@ const Userlayout = () => {
   }
 
   const handleNavigateToMails = () => {
-    navigate("/userdashboard/mails");
+    navigate("/userdashboard/report");
   };
 
 
@@ -44,7 +44,6 @@ const Userlayout = () => {
           <p>
             {FirstName} {LastName}
           </p>
-          <p>0 Reports</p>
         </div>
         <div className="profile-details">
           <div className="row-one">

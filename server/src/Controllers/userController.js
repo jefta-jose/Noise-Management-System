@@ -79,7 +79,7 @@ export const allUsers = async (req,res) =>{
         if (result === 0){
             return res.status(404).json({message: "no users found"});
         } else{
-            return res.status(201).json({result});
+            return res.status(201).send(result);
         }
     } catch (error) {
         return res.status(500).json({message: "internal server error"});
@@ -103,14 +103,13 @@ export const updateUserDetails = async (req, res) => {
                 PhoneNumber: req.body.PhoneNumber,
                 Occupation: req.body.Occupation,
                 PhotoURL: req.body.PhotoURL,
-                Role: req.body.Role
             };
 
 
         // filter out undefined valeus from updateDetails
         updateDetails = Object.fromEntries(Object.entries(updateDetails).filter(([_, value]) => value !== undefined));
 
-        const result = await updateUserDetailsService(id, updateDetails);
+        const result = await updateUserDetailsService(id, updateDetails );
         if(result.message){
             return res.status(500).json({message: result.message});
         } else{
