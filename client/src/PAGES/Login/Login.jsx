@@ -9,10 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useAdminLoginMutation } from "../../Features/userfeatures/Admin";
 
 const Login = () => {
   const navigate = useNavigate();
   const [login] = useLoginMutation();
+  const [adminLogin] = useAdminLoginMutation();
 
   const schema = yup.object().shape({
     Email: yup.string().required("Email is required"),
@@ -30,35 +32,51 @@ const Login = () => {
   const onSubmit = async (loginData) => {
     try {
       const result = await login(loginData).unwrap();
-      console.log("the login result", result);
-      
-      localStorage.clear()
-      // Extract the role from the first user data object in the result array
-      const Role = result.result[0].Role;
-      localStorage.setItem("FirstName", result.result[0].FirstName)
-      localStorage.setItem("LastName", result.result[0].LastName)
-      localStorage.setItem("UserID", result.result[0].UserID)
-      localStorage.setItem("County", result.result[0].County)
-      localStorage.setItem("Residence", result.result[0].Residence)
-      localStorage.setItem("PhoneNumber", result.result[0].PhoneNumber)
-      localStorage.setItem("Email", result.result[0].Email)
-      localStorage.setItem("NationalID", result.result[0].NationalID)
-      localStorage.setItem("Occupation", result.result[0].Occupation)
-      localStorage.setItem("Gender", result.result[0].Gender)
-      localStorage.setItem("PhotoURL", result.result[0].PhotoURL)
-
-      console.log('Role', Role);
-      
-      if (Role === "Admin") {
-        navigate("/admindashboard");
-      } else if (Role === "User") {
-        navigate("/userdashboard/userlayout/notifications");
+      console.log("user login result", result);
+  
+      const feedback = await adminLogin(loginData).unwrap();
+      console.log("admin login result", feedback);
+  
+      if (feedback.result && feedback.result.length > 0) {
+        const role = feedback.result[0].Role;
+        console.log("This user's role is", role);
+        if (role === "Admin") {
+          navigate("/admindashboard");
+        } else {
+          console.log("This user is not authorized to access the admin dashboard.");
+        }
+      } else {
+        console.log("No data found in the result array.");
+      }
+  
+      localStorage.clear();
+      const { result: userResult } = result;
+      if (userResult && userResult.length > 0) {
+        const { Role, ...userData } = userResult[0];
+        localStorage.setItem("FirstName", userData.FirstName);
+        localStorage.setItem("LastName", userData.LastName);
+        localStorage.setItem("UserID", userData.UserID);
+        localStorage.setItem("County", userData.County);
+        localStorage.setItem("Residence", userData.Residence);
+        localStorage.setItem("PhoneNumber", userData.PhoneNumber);
+        localStorage.setItem("Email", userData.Email);
+        localStorage.setItem("NationalID", userData.NationalID);
+        localStorage.setItem("Occupation", userData.Occupation);
+        localStorage.setItem("Gender", userData.Gender);
+        localStorage.setItem("PhotoURL", userData.PhotoURL);
+  
+        console.log("This user's role is", Role);
+  
+        if (Role === "User") {
+          navigate("/userdashboard/userlayout/notifications");
+        }
+      } else {
+        console.log("No data found in the user result array.");
       }
     } catch (error) {
-      console.error('Error occurred:', error);
+      console.error("Error occurred:", error);
     }
   };
-  
   
 
   return (
