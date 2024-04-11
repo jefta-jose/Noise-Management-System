@@ -77,31 +77,7 @@ export const loginAsAdminService = async (loginData) => {
             .input('Email', sql.VarChar(255), loginData.Email)
             .query("SELECT * FROM Admin WHERE Email = @Email");
 
-
-        // check whether such an admin exists
-        if (!result || result.recordset.length === 0) {
-            console.log("No such admin exists");
-            return { token: null };
-        }
-
-        // destructure the hashed password from the database
-        const { AdminID, Password: hashedPassword } = result.recordset[0];
-
-
-        // compare the provided password with the hashed password in the database
-        const passwordMatch = await bcrypt.compare(loginData.Password, hashedPassword);
-
-
-        // return null if passwords don't match
-        if (!passwordMatch) {
-            console.log("Passwords don't match");
-            return { token: null };
-        }
-
-        // generate a token if passwords match
-        const token = jwt.sign({ AdminID }, process.env.JWT_SECRET, { expiresIn: '48h' });
-        console.log("Generated token:", token);
-        return { token };
+        return result.recordset;
     } catch (error) {
         // Log the error
         console.error("Error in loginAsAdminService:", error);
