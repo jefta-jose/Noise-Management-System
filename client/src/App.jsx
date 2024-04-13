@@ -11,6 +11,8 @@ import Report from "./PAGES/userDashboard/Report";
 import Userlayout from "./PAGES/userDashboard/Userlayout";
 import Notifications from "./PAGES/userDashboard/Notifications";
 import Feedback from "./PAGES/userDashboard/Feedback";
+import AdminLayout from "./PAGES/adminDashboard/AdminLayout";
+import AdminMails from "./PAGES/adminDashboard/AdminMails";
 
 function App() {
   return (
@@ -20,7 +22,8 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/admindashboard" element={<AdminDashboard />}>
-            <Route path="mails" element={<Mails />} />
+            <Route path="adminLayout" element={<AdminLayout/>} />
+            <Route path="mails" element={<AdminMails />} />
             <Route path="reports" element={<Reports />} />
             <Route path="users" element={<Users />} />
           </Route>

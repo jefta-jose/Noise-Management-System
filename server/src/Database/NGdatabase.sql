@@ -40,11 +40,13 @@ CREATE TABLE Users(
 SELECT * FROM Users
 DROP TABLE Users
 
-CREATE TABLE Reports(
+SELECT COUNT(*) AS NumberOfUsers FROM Users;
+
+CREATE TABLE Reports (
     ReportID INT IDENTITY(1,1) PRIMARY KEY,
     UserID INT NOT NULL,
     Location VARCHAR(255),
-    TimeOfReporting TIME,
+    TimeOfReporting DATETIME,
     Type VARCHAR(255),
     Description VARCHAR(255),
     NoiseLevel VARCHAR(255),
@@ -53,6 +55,10 @@ CREATE TABLE Reports(
     SupportingDocuments VARCHAR(255),
     FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
 );
+
+SELECT *
+FROM Reports
+WHERE DATEPART(dw, TimeOfReporting) = 7; -- Replace 2 with the desired day number (1 for Sunday, 2 for Monday, ..., 7 for Saturday)
 
 
 SELECT * FROM Reports

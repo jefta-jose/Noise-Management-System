@@ -62,7 +62,7 @@ export const allEmails = async (req, res) => {
         if (result.length === 0) {
             return res.status(404).json({ message: "no Emails sent to users" });
         } else {
-            return res.status(201).json({ message: "all Emails", result });
+            return res.status(201).send(result);
         }
     } catch (error) {
         return res.status(500).json({ message: "internal server error" })

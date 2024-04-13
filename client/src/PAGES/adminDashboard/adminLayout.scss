@@ -1,0 +1,56 @@
+.adminLayout{
+    margin-top: 1rem;
+    padding: 1rem;
+    color: #353755;
+
+
+    .welcome{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        .FirstName{
+            font-weight: 700;
+        }
+    }
+
+    .numbers{
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-evenly;
+
+        .users{
+            background-color: #E0E4EE;
+            display: flex;
+            width: 20rem;
+            height: 7rem;
+            align-items: center;
+            justify-content: space-evenly;
+            border-radius: 5px;
+
+            .digits{
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                font-weight: 800;
+            }
+        }
+
+        .reports{
+            background-color: #E0E4EE;
+            display: flex;
+            width: 20rem;
+            height: 7rem;
+            align-items: center;
+            justify-content: space-evenly;
+            border-radius: 5px;
+
+            .digits{
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                font-weight: 800;
+            }
+        }
+    }
+}

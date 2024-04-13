@@ -1,8 +1,68 @@
 import { poolRequest, sql } from "../Utils/dbConnect.js";
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+
+//controller for numberOfReportsPerDayService
+export const numberOfReportsPerDayService = async () => {
+    try {
+        const query = `
+        WITH AllDays AS (
+            SELECT 1 AS DayOfWeek, 'Sunday' AS DayName
+            UNION ALL SELECT 2, 'Monday'
+            UNION ALL SELECT 3, 'Tuesday'
+            UNION ALL SELECT 4, 'Wednesday'
+            UNION ALL SELECT 5, 'Thursday'
+            UNION ALL SELECT 6, 'Friday'
+            UNION ALL SELECT 7, 'Saturday'
+        )
+        SELECT 
+            AllDays.DayName,
+            COALESCE(COUNT(Reports.ReportID), 0) AS NumberOfReports
+        FROM 
+            AllDays
+        LEFT JOIN Reports ON DATEPART(dw, Reports.TimeOfReporting) = AllDays.DayOfWeek
+        GROUP BY AllDays.DayName, AllDays.DayOfWeek
+        ORDER BY AllDays.DayOfWeek;
+        `;
+        
+        const result = await poolRequest().query(query);
+
+        // Extract the counts of reports for each day from the result
+        const counts = result.recordset.map(row => ({
+            dayOfWeek: row.DayName,
+            numberOfReports: row.NumberOfReports
+        }));
+        
+        return counts;
+    } catch (error) {
+        // Return error if there's any exception
+        throw error;
+    }
+}
 
 
+
+
+//service for getting all users
+export const numberOfUsersService = async () => {
+    try {
+        const result = await poolRequest()
+            .query("SELECT COUNT(*) AS count FROM Users");
+        return result.recordset;
+    } catch (error) {
+        return error;
+    }
+}
+
+//service for getting all reports
+export const numberOfReportsService = async () => {
+    try {
+        const result = await poolRequest()
+            .query("SELECT COUNT(*) AS count FROM Reports");
+        return result.recordset;
+    } catch (error) {
+        return error;
+    }
+}
 
 //service for registering an admin
 export const createAdminService = async (adminData) => {
