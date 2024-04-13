@@ -1,0 +1,80 @@
+// Users.scss
+
+.Users {
+    padding: 20px;
+  
+    button {
+      margin-right: 10px;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 5px;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  
+    .add-members {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+  
+      button {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  
+    h2 {
+      margin-bottom: 10px;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+  
+      th, td {
+        padding: 8px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+  
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+  
+      tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+  
+      tbody tr:hover {
+        background-color: #ddd;
+      }
+  
+      // Style for the NationalID column
+      td:nth-child(5) {
+        color: red;
+      }
+    }
+  }
+  
+  .on-delete{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: red;
+    font-weight: 800;
+    gap: .5rem;
+    img{
+        width: 2rem;
+    }
+  }

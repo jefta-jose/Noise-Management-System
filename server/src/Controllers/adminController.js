@@ -1,4 +1,53 @@
-import { deleteAdminService, getAllAdminsService, adminDetailsService, createAdminService, loginAsAdminService, updateAdminDetailsService } from "../Services/adminServices.js";
+import { numberOfReportsPerDayService, numberOfReportsService, numberOfUsersService, deleteAdminService, getAllAdminsService, adminDetailsService, createAdminService, loginAsAdminService, updateAdminDetailsService } from "../Services/adminServices.js";
+
+//controller for getting reports per day
+// numberOfReportsPerDay function
+export const numberOfReportsPerDay = async (req, res) =>{
+    try {
+        // Get the day of the week from the request query parameters
+        const { dayOfWeek } = req.query;
+
+        // Call the numberOfReportsPerDayService function with the specified day of the week
+        const report = await numberOfReportsPerDayService(dayOfWeek);
+
+        // Send the number of reports as a response
+        return res.status(200).send({ numberOfReports: report });
+    } catch (error) {
+        // Handle errors
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+
+///controller for number of users
+export const numberOfUsers = async (req, res) =>{
+    try {
+        const result = await numberOfUsersService();
+        if (result === 0){
+            return res.status(404).json({message: "users not found"});
+        } else {
+            return res.status(201).send(result);
+        }
+    } catch (error) {
+        return res.status(500).json({message: "internal server error"});
+    }
+}
+
+///controller for number of reports
+export const numberOfReports = async (req, res) =>{
+    try {
+        const result = await numberOfReportsService();
+        if (result === 0){
+            return res.status(404).json({message: "reports not found"});
+        } else {
+            return res.status(201).send(result);
+        }
+    } catch (error) {
+        return res.status(500).json({message: "internal server error"});
+    }
+}
+
 
 // controller for registering an admin  
 export const registerAdmin = async (req, res) => {
@@ -102,7 +151,7 @@ export const allAdmins = async (req, res) =>{
         if (data.length === 0){
             return res.status(404).json({ message: "No admins found" });
         } else {
-            return res.status(201).json({message: "admins found", data})
+            return res.status(201).send(data);
         }
     } catch (error) {
         return res.status(500).json({message: "internal server error"})

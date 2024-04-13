@@ -53,9 +53,9 @@ POST http://localhost:9500/api/register/user
 Content-Type: application/json
 
 {
-    "FirstName": "Steven",
-    "LastName": "Jobs",
-    "Email": "stevenjobs@gmail.com",
+    "FirstName": "Edwin",
+    "LastName": "njau",
+    "Email": "edwin@gmail.com",
     "Password": "pass404",
     "NationalID": "12345678",
     "County": "Nyeri",
@@ -85,7 +85,15 @@ GET http://localhost:9500/api/user/4
 GET http://localhost:9500/api/users
 
 ### get sum of all users
-GET http://localhost:9500/api/numberOfUsers/1
+GET http://localhost:9500/api/numberOfUsers
+
+
+### get sum of all reports
+GET http://localhost:9500/api/numberOfReports
+
+### get numberOfReportsPerDay
+GET http://localhost:9500/api/numberOfReportsPerDay
+
 
 ### update user details
 PUT http://localhost:9500/api/user/update/1
@@ -104,7 +112,7 @@ POST http://localhost:9500/api/createreport/1
 Content-Type: application/json
 
 {
-    "Location": "Karatina",
+    "Location": "Kigogo-ini",
     "Type": "roars",
     "Description": "I think there might be a lion",
     "NoiseLevel": "Very - high",
@@ -195,7 +203,7 @@ POST http://localhost:9500/api/createEmail/1
 Content-Type: application/json
 
 {
-    "UserID": 1,
+    "UserID": 1003,
     "Subject": "one two three",
     "Email": "the backend is working"
 }
@@ -214,7 +222,7 @@ Content-Type: application/json
 GET http://localhost:9500/api/Emails
 
 ### get all Emails for a user
-GET http://localhost:9500/api/Email/1
+GET http://localhost:9500/api/Email/1003
 
 ### get one Email
 GET http://localhost:9500/api/oneEmail/1003

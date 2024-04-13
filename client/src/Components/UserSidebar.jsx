@@ -6,7 +6,6 @@ import reportlogo from "../assets/Rectangle 8.png";
 import logoutlogo from "../assets/Rectangle 12.png";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./userSidebar.scss";
-import { useUpdateUserDetailsMutation } from "../Features/userfeatures/User";
 
 const UserSidebar = () => {
   const navigate = useNavigate();

@@ -3,23 +3,24 @@ import { poolRequest, sql } from "../Utils/dbConnect.js";
 //service for creating a report
 export const createReportService = async (id, Location, Type, Description, NoiseLevel, SourceOfNoise, DurationOfNoise, SupportingDocuments)  => {
     try {
-        //get the current time
-        const currentTime = new Date().toLocaleTimeString();
+        // Get the current date and time in ISO 8601 format
+        const currentTime = new Date().toISOString();
+        
         const result = await poolRequest()
-        .input("UserID", sql.Int, id)
-        .input('Location', sql.VarChar, Location)
-        .input("TimeOfReporting", sql.VarChar, currentTime)
-        .input("Type", sql.VarChar, Type)
-        .input("Description", sql.VarChar, Description)
-        .input("NoiseLevel",sql.VarChar, NoiseLevel)
-        .input("SourceOfNoise", sql.VarChar, SourceOfNoise)
-        .input("DurationOfNoise", sql.VarChar, DurationOfNoise)
-        .input("SupportingDocuments", sql.VarChar, SupportingDocuments)
+            .input("UserID", sql.Int, id)
+            .input('Location', sql.VarChar, Location)
+            .input("TimeOfReporting", sql.VarChar, currentTime)
+            .input("Type", sql.VarChar, Type)
+            .input("Description", sql.VarChar, Description)
+            .input("NoiseLevel",sql.VarChar, NoiseLevel)
+            .input("SourceOfNoise", sql.VarChar, SourceOfNoise)
+            .input("DurationOfNoise", sql.VarChar, DurationOfNoise)
+            .input("SupportingDocuments", sql.VarChar, SupportingDocuments);
 
         const query = `
-        INSERT INTO Reports(UserId, Location, TimeOfReporting, Type, Description, NoiseLevel, SourceOfNoise, DurationOfNoise, SupportingDocuments )
-        VALUES (@UserID, @Location, @TimeOfReporting, @Type, @Description, @NoiseLevel, @SourceOfNoise, @DurationOfNoise, @SupportingDocuments )
-        `
+            INSERT INTO Reports(UserId, Location, TimeOfReporting, Type, Description, NoiseLevel, SourceOfNoise, DurationOfNoise, SupportingDocuments )
+            VALUES (@UserID, @Location, @TimeOfReporting, @Type, @Description, @NoiseLevel, @SourceOfNoise, @DurationOfNoise, @SupportingDocuments )
+        `;
         
         await result.query(query);
 
@@ -29,6 +30,8 @@ export const createReportService = async (id, Location, Type, Description, Noise
         return error;
     }
 }
+
+
 
 //service for getting all reports
 export const allReportsService = async () =>{

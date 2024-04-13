@@ -33,23 +33,30 @@ const Login = () => {
     try {
       const result = await login(loginData).unwrap();
       console.log("user login result", result);
-  
+      
       const feedback = await adminLogin(loginData).unwrap();
       console.log("admin login result", feedback);
-  
+      
+      localStorage.clear();
+
       if (feedback.result && feedback.result.length > 0) {
         const role = feedback.result[0].Role;
         console.log("This user's role is", role);
         if (role === "Admin") {
-          navigate("/admindashboard");
+
+          localStorage.setItem("FirstName", feedback.result[0].FirstName)
+          localStorage.setItem("LastName", feedback.result[0].LastName)
+          localStorage.setItem("AdminID", feedback.result[0].AdminID)
+          localStorage.setItem("Role", role);
+
+          navigate("/admindashboard/adminLayout");
         } else {
-          console.log("This user is not authorized to access the admin dashboard.");
+          console.log(
+            "This user is not authorized to access the admin dashboard."
+          );
         }
-      } else {
-        console.log("No data found in the result array.");
       }
-  
-      localStorage.clear();
+
       const { result: userResult } = result;
       if (userResult && userResult.length > 0) {
         const { Role, ...userData } = userResult[0];
@@ -64,20 +71,17 @@ const Login = () => {
         localStorage.setItem("Occupation", userData.Occupation);
         localStorage.setItem("Gender", userData.Gender);
         localStorage.setItem("PhotoURL", userData.PhotoURL);
-  
+
         console.log("This user's role is", Role);
-  
+
         if (Role === "User") {
           navigate("/userdashboard/userlayout/notifications");
         }
-      } else {
-        console.log("No data found in the user result array.");
       }
     } catch (error) {
       console.error("Error occurred:", error);
     }
   };
-  
 
   return (
     <div className="login-container">

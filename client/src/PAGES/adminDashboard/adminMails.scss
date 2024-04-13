@@ -1,0 +1,226 @@
+.email-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    justify-content: space-evenly;
+  
+  
+    .create-emails {
+      justify-content: center;
+  
+      
+  
+      img{
+        width: 4rem;
+        background-color: #00b392;
+        border-radius: 4px;
+        cursor: pointer;
+  
+        &:hover {
+          animation: shake 0.1s infinite alternate;
+        }
+      }
+  
+      .useless-icons{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1rem;
+  
+        img{
+          cursor: pointer;
+          width: 2rem;
+          background-color: #e4e4e4;
+  
+          &:hover {
+            animation: shake 0.2s infinite alternate;
+          }
+          
+          @keyframes shake {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(5px);
+            }
+          }
+        }
+      }
+    }
+  
+    .display-inbox {
+      width: 90%;
+      background-color: #5BD3C7;
+      height: 80vh;
+      border-radius: 5px;
+      color: #353755;
+      padding: 0 5px 0 5px;
+      overflow-x: hidden;
+  
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 1rem;
+        overflow-x: hidden;
+      }
+  
+      li {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #e4e4e4;
+        padding: 10px;
+        transition: 0.5s;
+        background-color: rgba(255, 255, 255, 0.201);
+        border: 2px solid #e4e4e4;
+        margin-bottom: 1rem;
+      }
+  
+      .date {
+        flex: 1;
+      }
+  
+      .date:first-child {
+        margin-right: 10px;
+      }
+  
+      img {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+      }
+  
+      /* Style for hover effect */
+      li:hover {
+        background-color: #f5f5f5;
+        cursor: pointer;
+        color: black;
+        transform: scale(.95); /* Zoom effect */
+        transition: transform 1s ease; /* Smooth transition */
+      }
+    }
+  }
+  
+  .selected-email {
+    margin-top: 3rem;
+  }
+  
+  .selected-email h3 {
+    margin-top: 1rem;
+  }
+  
+  .selected-email p {
+    margin-bottom: 10px;
+  }
+  
+  .selected-email button {
+    margin-right: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .selected-email button:hover {
+    background-color: #0056b3;
+  }
+  
+  .selected-email button:active {
+    background-color: #0056b3;
+    transform: translateY(1px);
+  }
+  
+  .custom-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    height: 60%;
+
+    .email-header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      span{
+        background-color: #c82333;
+        border-radius: 50%;
+        height: 3rem;
+        width: 3rem;
+        display: grid;
+        place-items: center;
+        color: #ffffff;
+        font-weight: 800;
+        cursor: pointer;
+      }
+    }
+  }
+  
+  .modal-content h2 {
+    margin-top: 0;
+  }
+  
+  
+  .subject label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .subject input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  div:not(.subject) label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  div:not(.subject) input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button.send-mail{
+    background-color: #0056b3;
+  }
+  
+  button.close-modal {
+    margin-top: 10px;
+    background-color: #dc3545; /* Red color for close button */
+  }
+  
+  button.close-modal:hover {
+    background-color: #c82333; /* Darker red color on hover */
+  }
+  
